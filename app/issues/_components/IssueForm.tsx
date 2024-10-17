@@ -16,7 +16,7 @@ import { z } from 'zod';
 
 type IssueFormData = z.infer<typeof issueSchema>;
 
-const IssueForm = async ({ issue } : { issue? : Issue }) => {
+const IssueForm = ({ issue } : { issue? : Issue }) => {
 
   const router = useRouter();
   const {register, control, handleSubmit, formState: { errors }} = useForm<IssueFormData>({
