@@ -52,8 +52,8 @@ const IssueForm = ({ issue } : { issue? : Issue }) => {
         className='space-y-3' 
         onSubmit={onSubmit}
       >
-        <TextField.Root>
-          <TextField.Input defaultValue={issue?.title} placeholder='Title' {...register('title')}/>
+        <TextField.Root defaultValue={issue?.title} placeholder='Title' {...register('title')}>
+          {/* <TextField.Input defaultValue={issue?.title} placeholder='Title' {...register('title')}/> */}
         </TextField.Root>
         <ErrorMessages>
           {errors.title?.message}
