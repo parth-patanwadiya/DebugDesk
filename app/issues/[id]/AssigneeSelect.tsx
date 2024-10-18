@@ -6,7 +6,7 @@ import React from 'react'
 const AssigneeSelect = () => {
   return (
     <Select.Root>
-      <Select.Trigger />
+      <Select.Trigger placeholder='Assignee...'/>
       <Select.Content>
         <Select.Group>
           <Select.Label>Suggestions</Select.Label>
