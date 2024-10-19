@@ -36,10 +36,10 @@ const IssueSummary = ({ open, closed, inProgress }: Props) => {
         //     </Text>
         //   </Flex>
         // </Card>
-        <Box maxWidth="350px" key={container.label}>
+        <Box width="175px" key={container.label}>
           <Card asChild>
             <Link href={`issues/list?status=${container.status}`}>
-              <Text as="div" size="2" weight="medium">
+              <Text as="div" size="2" weight="medium" align="center">
                 {container.label}
               </Text>
               <Text as="div" color="gray" size="7" weight="bold" align="center">
