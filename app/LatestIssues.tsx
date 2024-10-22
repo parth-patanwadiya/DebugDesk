@@ -3,8 +3,12 @@ import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes";
 import React from "react";
 import { IssueStatusBadge } from "./components";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import AuthOptions from "./auth/AuthOptions";
 
 const LatestIssues = async () => {
+  const session = await getServerSession(AuthOptions);
+
   const issues = await prisma.issue.findMany({
     orderBy: { createdAt: "desc" },
     take: 5,
@@ -28,16 +32,18 @@ const LatestIssues = async () => {
                     <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
                     <IssueStatusBadge status={issue.status} />
                   </Flex>
-                  <Flex>
-                    {issue.assignedToUserId && (
-                      <Avatar
-                        fallback="?"
-                        src={issue.assignedToUser?.image!}
-                        size="2"
-                        radius="full"
-                      />
-                    )}
-                  </Flex>
+                  {session && (
+                    <Flex>
+                      {issue.assignedToUserId && (
+                        <Avatar
+                          fallback="?"
+                          src={issue.assignedToUser?.image!}
+                          size="2"
+                          radius="full"
+                        />
+                      )}
+                    </Flex>
+                  )}
                 </Flex>
               </Table.Cell>
             </Table.Row>
