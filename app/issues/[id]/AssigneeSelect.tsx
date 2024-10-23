@@ -16,7 +16,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 
   const assignIssue = (userId: string) => {
     axios
-      .patch("/api/issues/" + issue.id, {
+      .patch(process.env.NEXT_PUBLIC_NEXTAUTH_URL + "/api/issues/" + issue.id, {
         assignedToUserId: userId === "unassigned" ? null : userId,
       })
       .catch(() => {
@@ -51,8 +51,11 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 const useUsers = () =>
   useQuery<User[]>({
     queryKey: ["users"],
-    queryFn: () => axios.get("/api/users").then((res) => res.data),
-    staleTime: 60 * 1000, //60s
+    queryFn: () =>
+      axios
+        .get(process.env.NEXT_PUBLIC_NEXTAUTH_URL + "/api/users")
+        .then((res) => res.data),
+    staleTime: 0,
     retry: 3,
   });
 
