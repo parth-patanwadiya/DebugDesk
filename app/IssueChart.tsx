@@ -1,15 +1,14 @@
 "use client";
 
 import { Card } from "@radix-ui/themes";
-import React from "react";
+import { useEffect, useState } from "react";
 import {
-  ResponsiveContainer,
+  Bar,
   BarChart,
+  LabelList,
+  ResponsiveContainer,
   XAxis,
   YAxis,
-  Bar,
-  Tooltip,
-  Rectangle,
 } from "recharts";
 
 interface Props {
@@ -25,21 +24,26 @@ const IssueChart = ({ open, closed, inProgress }: Props) => {
     { label: "Closed", value: closed },
   ];
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null; // Prevent rendering until mounted
+
   return (
-    <Card>
-      <ResponsiveContainer width={525} height={330}>
-        <BarChart data={data}>
-          <XAxis dataKey="label" />
-          <YAxis />
-          <Tooltip />
-          <Bar
-            dataKey="value"
-            barSize={60}
-            fill="#FF5F5E"
-            activeBar={<Rectangle fill="gold" stroke="purple" />}
-          />
-        </BarChart>
-      </ResponsiveContainer>
+    <Card className="w-full">
+      <div className="h-[330px] md:h-[330px] w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data}>
+            <XAxis dataKey="label" />
+            <YAxis />
+            <Bar dataKey="value" barSize={60} fill="#FF5F5E" />
+            <LabelList dataKey="value" position="top" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </Card>
   );
 };

@@ -21,7 +21,10 @@ const IssueSummary = ({ open, closed, inProgress }: Props) => {
   ];
 
   return (
-    <Flex gap="3">
+    <Flex
+      gap="3"
+      className="flex flex-col w-full space-y-4 md:flex-row md:flex-wrap md:space-y-0"
+    >
       {containers.map((container) => (
         // <Card key={container.label}>
         //   <Flex direction="column" gap="1">
@@ -36,7 +39,11 @@ const IssueSummary = ({ open, closed, inProgress }: Props) => {
         //     </Text>
         //   </Flex>
         // </Card>
-        <Box width="175px" key={container.label}>
+        <Box
+          //width="175px"
+          key={container.label}
+          className="w-full md:w-[calc(33.33%-0.75rem)]"
+        >
           <Card asChild>
             <Link href={`issues/list?status=${container.status}`}>
               <Text as="div" size="2" weight="medium" align="center">
